@@ -6,7 +6,7 @@
   <div class="grid grid-cols-4 gap-4">
     <div class="p-6 rounded-lg shadow-lg bg-white">
       <p class="text-2xl font-bold">
-      <p>Saldo Atual: R$ <strong><%= @saldo %></strong></p>
+      <p>Saldo Atual: R$ <strong><%= number_to_currency @saldo %></strong></p>
     </div>
   </div>
 
