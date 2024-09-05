@@ -12,9 +12,14 @@
   <% end %>
 
   <div class="my-5">
-    <%= form.label :data %>
+    <%= form.label :tipo %>
     <%# logo abaixo ajustei para o usuário APENAS escolher: entrada ou saída %>
     <%= form.select :tipo, [['Entrada', 'entrada'], ['Saída', 'saida']], { }, { class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" } %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :data %>
+    <%= form.date_field :data, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", max: Date.current %>
   </div>
 
   <div class="my-5">
@@ -25,11 +30,6 @@
   <div class="my-5">
     <%= form.label :valor %>
     <%= form.number_field :valor, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :tipo %>
-    <%= form.text_field :tipo, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="inline">
