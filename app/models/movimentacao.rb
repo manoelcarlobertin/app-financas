@@ -4,6 +4,7 @@ class Movimentacao < ApplicationRecord
   # validates :data, presence: true
   validates :data, comparison: { less_than_or_equal_to: proc { Date.current } }
   validates :descricao, presence: true
+  validates :descricao, { maximum: 150 }
   validates :valor, presence: true
   validates :tipo, presence: true
 
