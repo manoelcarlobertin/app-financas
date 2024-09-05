@@ -1,24 +1,12 @@
 <div id="<%= dom_id movimentacao %>"
     class="p-6 rounded-lg shadow-lg bg-white flex <%= movimentacao.saida? ? 'text-red-700' : 'text-green-700' %>">
-  <spam class="mr-2>
-    <strong class="block font-medium mb-1">Data:</strong>
+  <span class="mr-2">
     <%= l movimentacao.data %>
-  </spam>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Descricao:</strong>
+  </span>
+  <span class="mr-2 flex-grow">
     <%= movimentacao.descricao %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Valor:</strong>
-    <%= movimentacao.valor %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Tipo:</strong>
-    <%= movimentacao.tipo %>
-  </p>
-
+  </span>
+ <span>
+    <%= number_to_currency movimentacao.valor %>
+ </span>
 </div>
