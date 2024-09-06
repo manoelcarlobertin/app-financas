@@ -19,8 +19,10 @@ class Movimentacao < ApplicationRecord
   private
 
   def valida_se_existe_saldo
+    return unless user
     return if entrada?
-    return if valor.to_f <= Movimentacao.saldo_atual
+    return if valor.to_f <= user.movimentacoes.saldo_atual
+    # return if valor.to_f <= Movimentacao.saldo_atual
     # if valor.present? && valor > Movimentacao.saldo_atual # poderia "valor.to_f" cast pra float.
     # pra validar tem que ser uma entrada e valor menor que o saldo atual, caso contrário ERROR.
     errors.add :valor, "NÃO HÁ SALDO SUFICIENTE."
