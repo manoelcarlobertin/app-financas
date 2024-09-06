@@ -2,24 +2,23 @@ class MovimentacoesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_movimentacao, only: %i[ destroy ]
 
-  # GET /movimentacoes or /movimentacoes.json
   def index
-    @movimentacoes = Movimentacao.order(data: :desc, created_at: :desc)
-    @saldo = Movimentacao.saldo_atual
+    @movimentacoes = collection.order(data: :desc, created_at: :desc)
+    @saldo = collection.saldo_atual
   end
 
   # GET /movimentacoes/new
   def new
-    @movimentacao = Movimentacao.new
+    @movimentacao = collection.new
   end
 
   # POST /movimentacoes or /movimentacoes.json
   def create
-    @movimentacao = Movimentacao.new(movimentacao_params)
+    @movimentacao = collection.new(movimentacao_params)
 
     respond_to do |format|
       if @movimentacao.save
-        format.html { redirect_to movimentacoes_url, notice: "Movimentacao was successfully created." }
+        format.html { redirect_to movimentacoes_url, notice: "A movimentação foi criada com sucesso." }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -31,14 +30,25 @@ class MovimentacoesController < ApplicationController
     @movimentacao.destroy
 
     respond_to do |format|
-      format.html { redirect_to movimentacoes_url, notice: "Movimentacao was successfully destroyed." }
+      format.html { redirect_to movimentacoes_url, notice: "A movimentação foi removida com sucesso." }
+      format.json { head :no_content }
     end
   end
 
   private
+
+    def collection
+      current_user.movimentacoes
+    end
+
     # Use callbacks to share common setup or constraints between actions.
+    # def set_movimentacao
+    #   @movimentacao = Movimentacao.find(params[:id])
+    # end
+
+    # Essa troca de "Movimentacao" para "collection" resolve separar por user as movimentações.
     def set_movimentacao
-      @movimentacao = Movimentacao.find(params[:id])
+      @movimentacao = collection.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
