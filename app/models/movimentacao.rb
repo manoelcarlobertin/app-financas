@@ -1,6 +1,8 @@
 class Movimentacao < ApplicationRecord
   enum :tipo, { saida: "saida", entrada: "entrada" }
 
+  belongs_to :user
+
   # validates :data, presence: true
   validates :data, comparison: { less_than_or_equal_to: proc { Date.current } }
   validates :descricao, presence: true
